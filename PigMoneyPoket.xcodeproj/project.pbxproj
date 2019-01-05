@@ -7,14 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28AE1600AFA2763818CEEDD1 /* Pods_PigMoneyPoket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AC255ED73E0DCBDDD455FB8 /* Pods_PigMoneyPoket.framework */; };
 		C30F856121E0B4A7007FCD55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30F856021E0B4A7007FCD55 /* AppDelegate.swift */; };
 		C30F856321E0B4A7007FCD55 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30F856221E0B4A7007FCD55 /* ViewController.swift */; };
 		C30F856621E0B4A7007FCD55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30F856421E0B4A7007FCD55 /* Main.storyboard */; };
 		C30F856821E0B4A8007FCD55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C30F856721E0B4A8007FCD55 /* Assets.xcassets */; };
 		C30F856B21E0B4A8007FCD55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30F856921E0B4A8007FCD55 /* LaunchScreen.storyboard */; };
+		C324A0B421E0BDE500065C84 /* BuyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C324A0B321E0BDE500065C84 /* BuyModel.swift */; };
+		C35BD6F521E0D8BA00BD6BC6 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BD6F421E0D8BA00BD6BC6 /* ListTableViewController.swift */; };
+		C35BD6F821E0D92D00BD6BC6 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BD6F721E0D92D00BD6BC6 /* ListTableViewCell.swift */; };
+		C35BD6FA21E0DC7400BD6BC6 /* MakeBuyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BD6F921E0DC7400BD6BC6 /* MakeBuyViewController.swift */; };
+		C35BD6FC21E0DED000BD6BC6 /* SingleTone.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BD6FB21E0DED000BD6BC6 /* SingleTone.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12288603CEDD576B46AD0D1A /* Pods-PigMoneyPoket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PigMoneyPoket.release.xcconfig"; path = "Pods/Target Support Files/Pods-PigMoneyPoket/Pods-PigMoneyPoket.release.xcconfig"; sourceTree = "<group>"; };
+		2AC255ED73E0DCBDDD455FB8 /* Pods_PigMoneyPoket.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PigMoneyPoket.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30F855D21E0B4A7007FCD55 /* PigMoneyPoket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PigMoneyPoket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30F856021E0B4A7007FCD55 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C30F856221E0B4A7007FCD55 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +30,12 @@
 		C30F856721E0B4A8007FCD55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C30F856A21E0B4A8007FCD55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C30F856C21E0B4A8007FCD55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C324A0B321E0BDE500065C84 /* BuyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyModel.swift; sourceTree = "<group>"; };
+		C35BD6F421E0D8BA00BD6BC6 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
+		C35BD6F721E0D92D00BD6BC6 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		C35BD6F921E0DC7400BD6BC6 /* MakeBuyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeBuyViewController.swift; sourceTree = "<group>"; };
+		C35BD6FB21E0DED000BD6BC6 /* SingleTone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTone.swift; sourceTree = "<group>"; };
+		F1F15F6CFA4B8AB5F5945CA1 /* Pods-PigMoneyPoket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PigMoneyPoket.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PigMoneyPoket/Pods-PigMoneyPoket.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +43,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28AE1600AFA2763818CEEDD1 /* Pods_PigMoneyPoket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0838A4E586103B6961D82E8A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F1F15F6CFA4B8AB5F5945CA1 /* Pods-PigMoneyPoket.debug.xcconfig */,
+				12288603CEDD576B46AD0D1A /* Pods-PigMoneyPoket.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8E562F9D862497A52BDA9FAE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2AC255ED73E0DCBDDD455FB8 /* Pods_PigMoneyPoket.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C30F855421E0B4A7007FCD55 = {
 			isa = PBXGroup;
 			children = (
 				C30F855F21E0B4A7007FCD55 /* PigMoneyPoket */,
 				C30F855E21E0B4A7007FCD55 /* Products */,
+				0838A4E586103B6961D82E8A /* Pods */,
+				8E562F9D862497A52BDA9FAE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +88,35 @@
 		C30F855F21E0B4A7007FCD55 /* PigMoneyPoket */ = {
 			isa = PBXGroup;
 			children = (
+				C324A0B021E0BD3A00065C84 /* models */,
 				C30F856021E0B4A7007FCD55 /* AppDelegate.swift */,
 				C30F856221E0B4A7007FCD55 /* ViewController.swift */,
 				C30F856421E0B4A7007FCD55 /* Main.storyboard */,
+				C35BD6F621E0D8E100BD6BC6 /* ViewControllers */,
 				C30F856721E0B4A8007FCD55 /* Assets.xcassets */,
 				C30F856921E0B4A8007FCD55 /* LaunchScreen.storyboard */,
 				C30F856C21E0B4A8007FCD55 /* Info.plist */,
+				C35BD6FB21E0DED000BD6BC6 /* SingleTone.swift */,
 			);
 			path = PigMoneyPoket;
+			sourceTree = "<group>";
+		};
+		C324A0B021E0BD3A00065C84 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				C324A0B321E0BDE500065C84 /* BuyModel.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		C35BD6F621E0D8E100BD6BC6 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C35BD6F421E0D8BA00BD6BC6 /* ListTableViewController.swift */,
+				C35BD6F721E0D92D00BD6BC6 /* ListTableViewCell.swift */,
+				C35BD6F921E0DC7400BD6BC6 /* MakeBuyViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +126,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C30F856F21E0B4A8007FCD55 /* Build configuration list for PBXNativeTarget "PigMoneyPoket" */;
 			buildPhases = (
+				96225A2AE75D689BFB11E52F /* [CP] Check Pods Manifest.lock */,
 				C30F855921E0B4A7007FCD55 /* Sources */,
 				C30F855A21E0B4A7007FCD55 /* Frameworks */,
 				C30F855B21E0B4A7007FCD55 /* Resources */,
+				62B8ACD77592497E5D8550F3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,13 +187,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		62B8ACD77592497E5D8550F3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PigMoneyPoket/Pods-PigMoneyPoket-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/TagListView/TagListView.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TagListView.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PigMoneyPoket/Pods-PigMoneyPoket-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		96225A2AE75D689BFB11E52F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PigMoneyPoket-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C30F855921E0B4A7007FCD55 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C30F856321E0B4A7007FCD55 /* ViewController.swift in Sources */,
+				C35BD6FA21E0DC7400BD6BC6 /* MakeBuyViewController.swift in Sources */,
+				C324A0B421E0BDE500065C84 /* BuyModel.swift in Sources */,
+				C35BD6FC21E0DED000BD6BC6 /* SingleTone.swift in Sources */,
 				C30F856121E0B4A7007FCD55 /* AppDelegate.swift in Sources */,
+				C35BD6F521E0D8BA00BD6BC6 /* ListTableViewController.swift in Sources */,
+				C35BD6F821E0D92D00BD6BC6 /* ListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +393,7 @@
 		};
 		C30F857021E0B4A8007FCD55 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F1F15F6CFA4B8AB5F5945CA1 /* Pods-PigMoneyPoket.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -298,6 +412,7 @@
 		};
 		C30F857121E0B4A8007FCD55 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 12288603CEDD576B46AD0D1A /* Pods-PigMoneyPoket.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
