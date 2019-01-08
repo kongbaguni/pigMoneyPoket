@@ -18,6 +18,10 @@
 		C35BD6F821E0D92D00BD6BC6 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BD6F721E0D92D00BD6BC6 /* ListTableViewCell.swift */; };
 		C35BD6FA21E0DC7400BD6BC6 /* MakeBuyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BD6F921E0DC7400BD6BC6 /* MakeBuyViewController.swift */; };
 		C35BD6FC21E0DED000BD6BC6 /* SingleTone.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BD6FB21E0DED000BD6BC6 /* SingleTone.swift */; };
+		C35BD70121E1FB8A00BD6BC6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C35BD70321E1FB8A00BD6BC6 /* Localizable.strings */; };
+		C35BD70721E1FC7C00BD6BC6 /* String+Utill.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BD70621E1FC7C00BD6BC6 /* String+Utill.swift */; };
+		C3EA47C521E373F600A11F75 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EA47C421E373F600A11F75 /* MapViewController.swift */; };
+		C3EA47C721E4C66200A11F75 /* OldPaymentsByLocationInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EA47C621E4C66200A11F75 /* OldPaymentsByLocationInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +39,11 @@
 		C35BD6F721E0D92D00BD6BC6 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		C35BD6F921E0DC7400BD6BC6 /* MakeBuyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeBuyViewController.swift; sourceTree = "<group>"; };
 		C35BD6FB21E0DED000BD6BC6 /* SingleTone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTone.swift; sourceTree = "<group>"; };
+		C35BD70221E1FB8A00BD6BC6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C35BD70421E1FBB800BD6BC6 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C35BD70621E1FC7C00BD6BC6 /* String+Utill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utill.swift"; sourceTree = "<group>"; };
+		C3EA47C421E373F600A11F75 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		C3EA47C621E4C66200A11F75 /* OldPaymentsByLocationInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldPaymentsByLocationInfoViewController.swift; sourceTree = "<group>"; };
 		F1F15F6CFA4B8AB5F5945CA1 /* Pods-PigMoneyPoket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PigMoneyPoket.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PigMoneyPoket/Pods-PigMoneyPoket.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,8 +97,10 @@
 		C30F855F21E0B4A7007FCD55 /* PigMoneyPoket */ = {
 			isa = PBXGroup;
 			children = (
+				C35BD70521E1FC5700BD6BC6 /* Extensions */,
 				C324A0B021E0BD3A00065C84 /* models */,
 				C30F856021E0B4A7007FCD55 /* AppDelegate.swift */,
+				C35BD70321E1FB8A00BD6BC6 /* Localizable.strings */,
 				C30F856221E0B4A7007FCD55 /* ViewController.swift */,
 				C30F856421E0B4A7007FCD55 /* Main.storyboard */,
 				C35BD6F621E0D8E100BD6BC6 /* ViewControllers */,
@@ -113,10 +124,20 @@
 			isa = PBXGroup;
 			children = (
 				C35BD6F421E0D8BA00BD6BC6 /* ListTableViewController.swift */,
+				C3EA47C421E373F600A11F75 /* MapViewController.swift */,
 				C35BD6F721E0D92D00BD6BC6 /* ListTableViewCell.swift */,
 				C35BD6F921E0DC7400BD6BC6 /* MakeBuyViewController.swift */,
+				C3EA47C621E4C66200A11F75 /* OldPaymentsByLocationInfoViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		C35BD70521E1FC5700BD6BC6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C35BD70621E1FC7C00BD6BC6 /* String+Utill.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +184,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = C30F855421E0B4A7007FCD55;
 			productRefGroup = C30F855E21E0B4A7007FCD55 /* Products */;
@@ -180,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C30F856B21E0B4A8007FCD55 /* LaunchScreen.storyboard in Resources */,
+				C35BD70121E1FB8A00BD6BC6 /* Localizable.strings in Resources */,
 				C30F856821E0B4A8007FCD55 /* Assets.xcassets in Resources */,
 				C30F856621E0B4A7007FCD55 /* Main.storyboard in Resources */,
 			);
@@ -197,6 +220,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PigMoneyPoket/Pods-PigMoneyPoket-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FSCalendar/FSCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/TagListView/TagListView.framework",
@@ -205,6 +229,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TagListView.framework",
@@ -244,9 +269,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C30F856321E0B4A7007FCD55 /* ViewController.swift in Sources */,
+				C35BD70721E1FC7C00BD6BC6 /* String+Utill.swift in Sources */,
 				C35BD6FA21E0DC7400BD6BC6 /* MakeBuyViewController.swift in Sources */,
 				C324A0B421E0BDE500065C84 /* BuyModel.swift in Sources */,
+				C3EA47C521E373F600A11F75 /* MapViewController.swift in Sources */,
 				C35BD6FC21E0DED000BD6BC6 /* SingleTone.swift in Sources */,
+				C3EA47C721E4C66200A11F75 /* OldPaymentsByLocationInfoViewController.swift in Sources */,
 				C30F856121E0B4A7007FCD55 /* AppDelegate.swift in Sources */,
 				C35BD6F521E0D8BA00BD6BC6 /* ListTableViewController.swift in Sources */,
 				C35BD6F821E0D92D00BD6BC6 /* ListTableViewCell.swift in Sources */,
@@ -272,6 +300,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		C35BD70321E1FB8A00BD6BC6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C35BD70221E1FB8A00BD6BC6 /* en */,
+				C35BD70421E1FBB800BD6BC6 /* ko */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -279,6 +316,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -340,6 +378,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

@@ -16,4 +16,28 @@ class ListTableViewCell: UITableViewCell {
     @IBOutlet weak var priceLabel:UILabel!
     @IBOutlet weak var dateLabel:UILabel!
     @IBOutlet weak var mapView:MKMapView!
+    
+    func loadData(data:PaymentModel) {
+        nameLabel.text = data.name
+        
+        priceLabel.text = NumberFormatter.localizedString(from: NSNumber(value: data.price), number: NumberFormatter.Style.currency)
+        
+        let ann = MKPointAnnotation()
+        ann.coordinate.latitude = data.latitude
+        ann.coordinate.longitude = data.longitude
+        mapView.addAnnotation(ann)
+        mapView.setCamera(MKMapCamera(lookingAtCenter: ann.coordinate, fromDistance: 400 , pitch: 30, heading: 0), animated: false)
+        
+        tagListView.removeAllTags()
+        for tag in data.tags {
+            if tag.isEmpty == false {
+                tagListView.addTag(tag)
+            }
+        }
+        
+        if let date = data.datetime {
+            let str = DateFormatter.localizedString(from: date, dateStyle: .full, timeStyle: DateFormatter.Style.medium)
+            dateLabel.text = str
+        }
+    }
 }

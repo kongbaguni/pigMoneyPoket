@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  PigMoneyPoket
+
+  Created by Changyul Seo on 06/01/2019.
+  Copyright © 2019 Changyul Seo. All rights reserved.
+*/
+"name" = "이름";
+"confirm" = "확인";
+"cancel" = "취소";
+"income" = "수입";
+"expenditure" = "지출";
+"tag" = "태그";
+

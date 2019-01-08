@@ -9,28 +9,133 @@
 import UIKit
 import RealmSwift
 import TagListView
+import FSCalendar
+import MapKit
+
 class ListTableViewController: UITableViewController {
+    static var viewController:ListTableViewController {
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "listController") as! ListTableViewController
+    }
+    
+    @IBOutlet weak var calendarView: FSCalendar!
+
+    var tag:String? = nil
+    
+    var datas:Results<PaymentModel> {
+        var list = try! Realm().objects(PaymentModel.self)
+        if let tag = self.tag {
+            
+            list = list.filter("tag contains[C] %@", ",\(tag),")
+        }
+        return list
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.onTouchupAddBtn(_:)))
         title = "list"
+        if let t = tag {
+            tableView.tableHeaderView = UIView()
+            tableView.tableFooterView = UIView()
+            title = t
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let id = segue.identifier else {
             return
         }
+        switch id {
+        case "income":
+            if let vc = segue.destination as? MakePaymentViewController {
+                vc.data.isIncome = true
+            }
+            
+        case "expenditure":
+            if let vc = segue.destination as? MakePaymentViewController {
+                vc.data.isIncome = false
+            }
+            
+        case "edit":
+            if let vc = segue.destination as? MakePaymentViewController ,
+                let id = sender as? String{
+                vc.paymentID = id
+            }
+
+        case "showMap":
+            if let vc = segue.destination as? MapViewController,
+                let id = sender as? String {
+                vc.paymentID = id
+            }
+        default:
+            break
+        }
     }
     
-    @objc func onTouchupAddBtn(_ sender:UIBarButtonItem) {
-        self.performSegue(withIdentifier: "makePayment", sender: nil)
-//        let vc = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//        vc.addAction(UIAlertAction(title: "+", style: .default, handler: { (action) in
-//            self.performSegue(withIdentifier: "makePayment", sender: nil)
-//        }))
-//        vc.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
-//        present(vc, animated: true, completion: nil)
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return datas.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
+        let data = datas[indexPath.row]
+        cell.loadData(data: data)
+        cell.tagListView.delegate = self
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        return [
+            UITableViewRowAction(style: .destructive, title: "delete".localized, handler: { (action, indexPath) in
+                let vc = UIAlertController(title: nil, message: "delete?".localized, preferredStyle: .alert)
+                vc.addAction(UIAlertAction(title: "confirm".localized, style: .default, handler: { (action) in
+                    let data = self.datas[indexPath.row]
+                    let realm = try! Realm()
+                    realm.beginWrite()
+                    realm.delete(data)
+                    try! realm.commitWrite()
+                    self.tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+                }))
+                vc.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: nil))
+                self.present(vc, animated: true, completion: nil)
+            }),
+            UITableViewRowAction(style: .default, title: "edit", handler: { (action, indexPath) in
+                let data = self.datas[indexPath.row]
+                self.performSegue(withIdentifier: "edit", sender: data.id)
+            })
+        ]
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let data = datas[indexPath.row]
+        self.performSegue(withIdentifier: "showMap", sender: data.id)
+    }
+    
+}
+
+extension ListTableViewController: TagListViewDelegate {
+    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        if self.tag == title {
+            return
+        }
+        if self.tag != nil {
+            navigationController?.popViewController(animated: true)
+        }
+        let vc = ListTableViewController.viewController
+        vc.tag = title
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
 }

@@ -9,5 +9,6 @@ target 'PigMoneyPoket' do
 
 pod 'RealmSwift' 
 pod 'TagListView'
+pod 'FSCalendar'
 
 end
