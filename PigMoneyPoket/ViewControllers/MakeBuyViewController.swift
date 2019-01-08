@@ -141,7 +141,7 @@ class MakePaymentViewController: UITableViewController {
         }
     }
     
-    func loadData(model:PaymentModel) {
+    func loadData(model:PaymentModel, isFixLocation:Bool = true) {
         data.coordinate = CLLocationCoordinate2D(latitude: model.latitude, longitude: model.longitude)
         data.isIncome = model.isIncome
         data.name = model.name
@@ -156,12 +156,14 @@ class MakePaymentViewController: UITableViewController {
         } else {
             title = "expenditure".localized
         }
-        let ann = MKPointAnnotation()
-        ann.coordinate.latitude = model.latitude
-        ann.coordinate.longitude = model.longitude
-        mapView.addAnnotation(ann)
-        mapView.setCamera(MKMapCamera(lookingAtCenter: ann.coordinate, fromDistance: 200, pitch: 30, heading: 0), animated: locationUpdateCount > 0)
-        mapView.showsUserLocation = false
+        if isFixLocation {
+            let ann = MKPointAnnotation()
+            ann.coordinate.latitude = model.latitude
+            ann.coordinate.longitude = model.longitude
+            mapView.addAnnotation(ann)
+            mapView.setCamera(MKMapCamera(lookingAtCenter: ann.coordinate, fromDistance: 200, pitch: 30, heading: 0), animated: locationUpdateCount > 0)
+            mapView.showsUserLocation = false
+        }
 
     }
     
@@ -290,7 +292,7 @@ extension MakePaymentViewController : OldPaymentsByLocationInfoViewControllerDel
             return
         }
         
-        loadData(model: payment)
+        loadData(model: payment, isFixLocation: false)
         updateLabel()
     }
 }
