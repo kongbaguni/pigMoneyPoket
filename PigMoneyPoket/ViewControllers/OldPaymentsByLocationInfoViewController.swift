@@ -14,6 +14,10 @@ protocol OldPaymentsByLocationInfoViewControllerDelegate : class {
 }
 
 class OldPaymentsByLocationInfoViewController: UITableViewController {
+    deinit {
+        debugPrint("------ \(#file) \(#function) -----")
+    }
+
     weak var delegate:OldPaymentsByLocationInfoViewControllerDelegate? = nil
     var paymentIds:[String] = []
     

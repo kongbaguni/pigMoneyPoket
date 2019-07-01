@@ -11,6 +11,10 @@ import MapKit
 import TagListView
 
 class ListTableViewCell: UITableViewCell {
+    deinit {
+        debugPrint("------ \(#file) \(#function) -----")
+    }
+
     @IBOutlet weak var nameLabel:UILabel!
     @IBOutlet weak var tagListView:TagListView!
     @IBOutlet weak var priceLabel:UILabel!

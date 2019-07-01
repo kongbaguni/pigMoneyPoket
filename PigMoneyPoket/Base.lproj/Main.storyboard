@@ -145,12 +145,28 @@
                                     <outlet property="tagListView" destination="h1t-qN-sVK" id="FkA-cv-CIQ"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="rWs-In-Bet">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="sum" textLabel="RQ1-Pw-wqz" detailTextLabel="nZG-SF-VWM" style="IBUITableViewCellStyleValue1" id="rWs-In-Bet">
                                 <rect key="frame" x="0.0" y="405.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rWs-In-Bet" id="37u-f9-MGw">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RQ1-Pw-wqz">
+                                            <rect key="frame" x="16" y="12" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nZG-SF-VWM">
+                                            <rect key="frame" x="315" y="12" width="44" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -162,6 +178,7 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="zpw-4K-YJr"/>
                     <connections>
                         <outlet property="calendarView" destination="wMR-Pr-Xnk" id="amJ-SW-gKe"/>
+                        <outlet property="footerView" destination="Ksu-ZE-5gR" id="d2C-eM-5Fn"/>
                         <segue destination="UUM-vg-muX" kind="show" identifier="edit" id="deL-TS-LoM"/>
                         <segue destination="4X5-h2-aKd" kind="show" identifier="showMap" id="5Wn-Tm-gLg"/>
                     </connections>
@@ -353,20 +370,50 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kEh-zw-33j">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="503"/>
                             </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="고구마" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWE-Bh-Q3p">
+                                <rect key="frame" x="15" y="577" width="345" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019년 3월 1일 19:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zb3-Up-eC0">
+                                <rect key="frame" x="15" y="608" width="345" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3000원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KNc-hQ-zsu">
+                                <rect key="frame" x="15" y="634" width="345" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="kEh-zw-33j" firstAttribute="leading" secondItem="vVY-mq-GUO" secondAttribute="leading" id="1kX-0d-keQ"/>
-                            <constraint firstItem="vVY-mq-GUO" firstAttribute="bottom" secondItem="kEh-zw-33j" secondAttribute="bottom" id="2zL-a9-Khm"/>
+                            <constraint firstItem="vVY-mq-GUO" firstAttribute="bottom" secondItem="kEh-zw-33j" secondAttribute="bottom" constant="100" id="2zL-a9-Khm"/>
+                            <constraint firstItem="KNc-hQ-zsu" firstAttribute="top" secondItem="Zb3-Up-eC0" secondAttribute="bottom" constant="10" id="7pm-nI-7kP"/>
+                            <constraint firstItem="dWE-Bh-Q3p" firstAttribute="top" secondItem="kEh-zw-33j" secondAttribute="bottom" constant="10" id="IMf-HR-h67"/>
                             <constraint firstItem="vVY-mq-GUO" firstAttribute="trailing" secondItem="kEh-zw-33j" secondAttribute="trailing" id="NuG-ng-3Sr"/>
+                            <constraint firstItem="KNc-hQ-zsu" firstAttribute="leading" secondItem="vVY-mq-GUO" secondAttribute="leading" constant="15" id="Ra7-0L-KCO"/>
+                            <constraint firstItem="vVY-mq-GUO" firstAttribute="trailing" secondItem="dWE-Bh-Q3p" secondAttribute="trailing" constant="15" id="RqJ-zg-rOT"/>
+                            <constraint firstItem="Zb3-Up-eC0" firstAttribute="top" secondItem="dWE-Bh-Q3p" secondAttribute="bottom" constant="10" id="T3x-kq-tTi"/>
+                            <constraint firstItem="Zb3-Up-eC0" firstAttribute="leading" secondItem="vVY-mq-GUO" secondAttribute="leading" constant="15" id="Um3-PR-Jgu"/>
+                            <constraint firstItem="dWE-Bh-Q3p" firstAttribute="leading" secondItem="vVY-mq-GUO" secondAttribute="leading" constant="15" id="fRz-pI-eYk"/>
+                            <constraint firstItem="vVY-mq-GUO" firstAttribute="trailing" secondItem="Zb3-Up-eC0" secondAttribute="trailing" constant="15" id="hGH-MC-U7Z"/>
                             <constraint firstItem="kEh-zw-33j" firstAttribute="top" secondItem="vVY-mq-GUO" secondAttribute="top" id="nX1-6n-kUp"/>
+                            <constraint firstItem="vVY-mq-GUO" firstAttribute="trailing" secondItem="KNc-hQ-zsu" secondAttribute="trailing" constant="15" id="spU-tD-lg7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vVY-mq-GUO"/>
                     </view>
                     <connections>
+                        <outlet property="dateLabel" destination="Zb3-Up-eC0" id="Syz-uO-mEO"/>
                         <outlet property="mapView" destination="kEh-zw-33j" id="Dnf-aL-pDe"/>
+                        <outlet property="priceLabel" destination="KNc-hQ-zsu" id="nfm-cn-G9B"/>
+                        <outlet property="titleLabel" destination="dWE-Bh-Q3p" id="1w1-mr-N5g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LTb-E9-b4q" userLabel="First Responder" sceneMemberID="firstResponder"/>

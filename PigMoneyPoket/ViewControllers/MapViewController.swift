@@ -12,7 +12,15 @@ import UIKit
 import RealmSwift
 
 class MapViewController: UIViewController {
+    deinit {
+        debugPrint("------ \(#file) \(#function) -----")
+    }
+
     @IBOutlet weak var mapView:MKMapView!
+    @IBOutlet weak var titleLabel:UILabel!
+    @IBOutlet weak var dateLabel:UILabel!
+    @IBOutlet weak var priceLabel:UILabel!
+    
     var paymentID:String? = nil
     var payment:PaymentModel? {
         if let id = paymentID {
@@ -31,10 +39,14 @@ class MapViewController: UIViewController {
         ann.coordinate.longitude = pay.longitude
         ann.coordinate.latitude = pay.latitude
         ann.title = pay.name
-        ann.subtitle = NumberFormatter.localizedString(from: NSNumber(value: pay.price), number: .currency)
+        let price = NumberFormatter.localizedString(from: NSNumber(value: pay.price), number: .currency)
+        ann.subtitle = price
         mapView.addAnnotation(ann)
         mapView.setCamera(MKMapCamera(lookingAtCenter: ann.coordinate, fromDistance: 800 , pitch: 30, heading: 0), animated: false)
-
+        titleLabel.text = payment?.name
+        dateLabel.text = DateFormatter.localizedString(from: pay.datetime!, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.medium)
+        priceLabel.text = price
+        priceLabel.textColor = pay.price < 0 ? .red : .blue
     }
 
     

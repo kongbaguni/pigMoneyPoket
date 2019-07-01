@@ -13,12 +13,17 @@ import FSCalendar
 import MapKit
 
 class ListTableViewController: UITableViewController {
+    deinit {
+        debugPrint("------ \(#file) \(#function) -----")
+    }
+
     static var viewController:ListTableViewController {
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "listController") as! ListTableViewController
     }
     
     @IBOutlet weak var calendarView: FSCalendar!
-
+    @IBOutlet weak var footerView: UIView!
+    
     var tag:String? = nil
     
     var datas:Results<PaymentModel> {
@@ -27,7 +32,7 @@ class ListTableViewController: UITableViewController {
             
             list = list.filter("tag contains[C] %@", ",\(tag),")
         }
-        if let date = calendarView.selectedDate {
+        if let date = calendarView?.selectedDate {
             list = list.filter("datetime > %@ && datetime < %@",date, Date(timeInterval: 86400
                 , since: date))
         }
@@ -38,17 +43,22 @@ class ListTableViewController: UITableViewController {
         super.viewDidLoad()
         title = "income, expenditure".localized
         if let t = tag {
-            tableView.tableHeaderView = UIView()
-            tableView.tableFooterView = UIView()
+            tableView.tableHeaderView?.isHidden = true
+            tableView.tableFooterView?.isHidden = true
+            for view in [tableView.tableHeaderView, tableView.tableFooterView] {
+                view?.frame.size.height = 0
+            }
             title = t
         }
         calendarView.dataSource = self
         calendarView.delegate = self
+        setFooterViewShow()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()
+        calendarView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -83,19 +93,36 @@ class ListTableViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if datas.count > 0 {
+            return 2
+        }
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return datas.count
+        if section == 0 {
+            return datas.count
+        }
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-        let data = datas[indexPath.row]
-        cell.loadData(data: data)
-        cell.tagListView.delegate = self
-        return cell
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
+            let data = datas[indexPath.row]
+            cell.loadData(data: data)
+            cell.tagListView.delegate = self
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "sum", for: indexPath)
+            cell.textLabel?.text = "sum".localized
+            let sum:Int = datas.sum(ofProperty: "price")
+            
+            cell.detailTextLabel?.text = NumberFormatter.localizedString(from: NSNumber(value: sum), number: NumberFormatter.Style.currency)
+            cell.detailTextLabel?.textColor = sum < 0 ? .red : .blue
+            return cell
+        }
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -112,21 +139,54 @@ class ListTableViewController: UITableViewController {
                     realm.beginWrite()
                     realm.delete(data)
                     try! realm.commitWrite()
-                    self.tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+                    self.calendarView.reloadData()
+                    self.tableView.deleteRows(at: [indexPath], with: .left)
                 }))
                 vc.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: nil))
                 self.present(vc, animated: true, completion: nil)
             }),
-            UITableViewRowAction(style: .default, title: "edit".localized, handler: { (action, indexPath) in
+            UITableViewRowAction(style: .normal, title: "edit".localized, handler: { (action, indexPath) in
                 let data = self.datas[indexPath.row]
                 self.performSegue(withIdentifier: "edit", sender: data.id)
             })
         ]
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            tableView.deleteRows(at: [indexPath], with: .left)
+            break
+        default:
+            break
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let data = datas[indexPath.row]
-        self.performSegue(withIdentifier: "showMap", sender: data.id)
+        switch indexPath.section {
+        case 0:
+            let data = datas[indexPath.row]
+            self.performSegue(withIdentifier: "showMap", sender: data.id)
+        default:
+            break
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+    
+    private func setFooterViewShow() {
+        footerView.isHidden = false
+        if let d = calendarView.selectedDate {
+            if d.timeIntervalSince1970 != Date().midnight.timeIntervalSince1970 {
+                footerView.isHidden = true
+            }
+        }
     }
     
 }
@@ -156,5 +216,6 @@ extension ListTableViewController : FSCalendarDataSource {
 extension ListTableViewController : FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         self.tableView.reloadData()
+        setFooterViewShow()
     }
 }

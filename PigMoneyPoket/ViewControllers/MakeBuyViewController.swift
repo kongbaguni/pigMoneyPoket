@@ -13,6 +13,10 @@ import TagListView
 import CoreLocation
 
 class MakePaymentViewController: UITableViewController {
+    deinit {
+        debugPrint("------ \(#file) \(#function) -----")
+    }
+    
     @IBOutlet weak var footerView: UIView!
     var locationUpdateCount = 0
     var paymentID:String? = nil
