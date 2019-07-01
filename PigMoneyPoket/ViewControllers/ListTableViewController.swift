@@ -32,7 +32,7 @@ class ListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "list"
+        title = "income, expenditure".localized
         if let t = tag {
             tableView.tableHeaderView = UIView()
             tableView.tableFooterView = UIView()

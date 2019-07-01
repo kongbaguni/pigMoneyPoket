@@ -41,7 +41,7 @@ class PaymentModel: Object {
                 return
         }
         self.name = name
-        if isIncome {
+        if data.isIncome {
             self.price = price
         } else {
             self.price = -abs(price)

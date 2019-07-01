@@ -45,6 +45,8 @@ class MakePaymentViewController: UITableViewController {
     @IBOutlet weak var tagCell: UITableViewCell!
     
     @IBOutlet weak var tagLabel: UILabel!
+    @IBOutlet weak var listBtn:UIBarButtonItem!
+    
     let locationManager = CLLocationManager()
 
     class Data {
@@ -83,8 +85,10 @@ class MakePaymentViewController: UITableViewController {
         } else {
             if data.isIncome {
                 title = "income".localized
+                listBtn.title = "income list".localized
             } else {
                 title = "expenditure".localized
+                listBtn.title = "expenditure list".localized
             }
             locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
