@@ -25,6 +25,7 @@ class ListTableViewCell: UITableViewCell {
         let ann = MKPointAnnotation()
         ann.coordinate.latitude = data.latitude
         ann.coordinate.longitude = data.longitude
+        mapView.isUserInteractionEnabled = false
         mapView.addAnnotation(ann)
         mapView.setCamera(MKMapCamera(lookingAtCenter: ann.coordinate, fromDistance: 400 , pitch: 30, heading: 0), animated: false)
         
