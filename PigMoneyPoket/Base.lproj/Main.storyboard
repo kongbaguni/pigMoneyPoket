@@ -370,31 +370,59 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="kEh-zw-33j">
-                                <rect key="frame" x="0.0" y="64" width="375" height="503"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="453"/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="고구마" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWE-Bh-Q3p">
-                                <rect key="frame" x="15" y="577" width="345" height="21"/>
+                                <rect key="frame" x="15" y="527" width="345" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019년 3월 1일 19:30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zb3-Up-eC0">
-                                <rect key="frame" x="15" y="608" width="345" height="16"/>
+                                <rect key="frame" x="15" y="558" width="345" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3000원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KNc-hQ-zsu">
-                                <rect key="frame" x="15" y="634" width="345" height="21"/>
+                                <rect key="frame" x="15" y="584" width="345" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bhu-sM-kUt" customClass="TagListView" customModule="TagListView">
+                                <rect key="frame" x="15" y="615" width="345" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTextColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                                        <color key="value" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="tagHighlightedBackgroundColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="tagSelectedBackgroundColor">
+                                        <color key="value" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="enableRemoveButton" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="kEh-zw-33j" firstAttribute="leading" secondItem="vVY-mq-GUO" secondAttribute="leading" id="1kX-0d-keQ"/>
-                            <constraint firstItem="vVY-mq-GUO" firstAttribute="bottom" secondItem="kEh-zw-33j" secondAttribute="bottom" constant="100" id="2zL-a9-Khm"/>
+                            <constraint firstItem="vVY-mq-GUO" firstAttribute="bottom" secondItem="kEh-zw-33j" secondAttribute="bottom" constant="150" id="2zL-a9-Khm"/>
                             <constraint firstItem="KNc-hQ-zsu" firstAttribute="top" secondItem="Zb3-Up-eC0" secondAttribute="bottom" constant="10" id="7pm-nI-7kP"/>
                             <constraint firstItem="dWE-Bh-Q3p" firstAttribute="top" secondItem="kEh-zw-33j" secondAttribute="bottom" constant="10" id="IMf-HR-h67"/>
                             <constraint firstItem="vVY-mq-GUO" firstAttribute="trailing" secondItem="kEh-zw-33j" secondAttribute="trailing" id="NuG-ng-3Sr"/>
@@ -402,10 +430,14 @@
                             <constraint firstItem="vVY-mq-GUO" firstAttribute="trailing" secondItem="dWE-Bh-Q3p" secondAttribute="trailing" constant="15" id="RqJ-zg-rOT"/>
                             <constraint firstItem="Zb3-Up-eC0" firstAttribute="top" secondItem="dWE-Bh-Q3p" secondAttribute="bottom" constant="10" id="T3x-kq-tTi"/>
                             <constraint firstItem="Zb3-Up-eC0" firstAttribute="leading" secondItem="vVY-mq-GUO" secondAttribute="leading" constant="15" id="Um3-PR-Jgu"/>
+                            <constraint firstItem="vVY-mq-GUO" firstAttribute="trailing" secondItem="Bhu-sM-kUt" secondAttribute="trailing" constant="15" id="V9M-ik-6Ks"/>
+                            <constraint firstItem="Bhu-sM-kUt" firstAttribute="leading" secondItem="vVY-mq-GUO" secondAttribute="leading" constant="15" id="Xcg-yE-NUp"/>
+                            <constraint firstItem="Bhu-sM-kUt" firstAttribute="top" secondItem="KNc-hQ-zsu" secondAttribute="bottom" constant="10" id="aS8-ZL-fDr"/>
                             <constraint firstItem="dWE-Bh-Q3p" firstAttribute="leading" secondItem="vVY-mq-GUO" secondAttribute="leading" constant="15" id="fRz-pI-eYk"/>
                             <constraint firstItem="vVY-mq-GUO" firstAttribute="trailing" secondItem="Zb3-Up-eC0" secondAttribute="trailing" constant="15" id="hGH-MC-U7Z"/>
                             <constraint firstItem="kEh-zw-33j" firstAttribute="top" secondItem="vVY-mq-GUO" secondAttribute="top" id="nX1-6n-kUp"/>
                             <constraint firstItem="vVY-mq-GUO" firstAttribute="trailing" secondItem="KNc-hQ-zsu" secondAttribute="trailing" constant="15" id="spU-tD-lg7"/>
+                            <constraint firstItem="vVY-mq-GUO" firstAttribute="bottom" secondItem="Bhu-sM-kUt" secondAttribute="bottom" constant="10" id="tyB-gO-l9a"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vVY-mq-GUO"/>
                     </view>
@@ -413,12 +445,13 @@
                         <outlet property="dateLabel" destination="Zb3-Up-eC0" id="Syz-uO-mEO"/>
                         <outlet property="mapView" destination="kEh-zw-33j" id="Dnf-aL-pDe"/>
                         <outlet property="priceLabel" destination="KNc-hQ-zsu" id="nfm-cn-G9B"/>
+                        <outlet property="tagListView" destination="Bhu-sM-kUt" id="JdI-IO-lTY"/>
                         <outlet property="titleLabel" destination="dWE-Bh-Q3p" id="1w1-mr-N5g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LTb-E9-b4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="825" y="997"/>
+            <point key="canvasLocation" x="824.79999999999995" y="996.25187406296857"/>
         </scene>
         <!--Old Payments By Location Info View Controller-->
         <scene sceneID="Xp6-uQ-CHv">
@@ -585,6 +618,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Tov-VY-7RD"/>
+        <segue reference="ZQo-iN-qXN"/>
     </inferredMetricsTieBreakers>
 </document>

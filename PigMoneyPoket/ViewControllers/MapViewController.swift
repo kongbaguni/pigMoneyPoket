@@ -10,6 +10,7 @@ import Foundation
 import MapKit
 import UIKit
 import RealmSwift
+import TagListView
 
 class MapViewController: UIViewController {
     deinit {
@@ -20,7 +21,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var dateLabel:UILabel!
     @IBOutlet weak var priceLabel:UILabel!
-    
+    @IBOutlet weak var tagListView:TagListView!
     var paymentID:String? = nil
     var payment:PaymentModel? {
         if let id = paymentID {
@@ -47,7 +48,19 @@ class MapViewController: UIViewController {
         dateLabel.text = DateFormatter.localizedString(from: pay.datetime!, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.medium)
         priceLabel.text = price
         priceLabel.textColor = pay.price < 0 ? .red : .blue
+        for tag in pay.tags {
+            if tag.isEmpty == false {
+                tagListView.addTag(tag)
+            }
+        }
+        tagListView.delegate = self
     }
+}
 
-    
+extension MapViewController : TagListViewDelegate {
+    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        let vc = ListTableViewController.viewController
+        vc.tag = title
+        self.navigationController?.pushViewController(vc, animated: true)
+    }    
 }
