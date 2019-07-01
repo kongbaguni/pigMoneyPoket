@@ -96,6 +96,7 @@ class MakePaymentViewController: UITableViewController {
         }
         updateLabel()
         checkBtn()
+        priceCell.textLabel?.textColor = self.data.isIncome ? .blue : .red
     }
     
     
@@ -170,9 +171,7 @@ class MakePaymentViewController: UITableViewController {
         }
 
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
+    private func inputRun(cell:UITableViewCell?) {
         switch cell {
         case nameCell:
             let vc = UIAlertController(title: "이름입력", message: "이름을 입력하세요", preferredStyle: .alert)
@@ -183,7 +182,6 @@ class MakePaymentViewController: UITableViewController {
             }
             vc.addAction(UIAlertAction(title: "confirm".localized, style: .cancel) { _ in
                 self.data.name = vc.textFields?.first?.text
-                tableView.deselectRow(at: indexPath, animated: true)
                 self.updateLabel()
             })
             present(vc, animated: true, completion: nil)
@@ -200,9 +198,13 @@ class MakePaymentViewController: UITableViewController {
             }
             vc.addAction(UIAlertAction(title: "confirm".localized, style: .cancel) { _ in
                 if let t = vc.textFields?.first?.text {
-                    self.data.price = NSString(string: t).integerValue
+                    let price = abs(NSString(string: t).integerValue)
+                    if self.data.isIncome {
+                        self.data.price = price
+                    } else {
+                        self.data.price = -price
+                    }
                 }
-                tableView.deselectRow(at: indexPath, animated: true)
                 self.updateLabel()
             })
             present(vc, animated: true, completion: nil)
@@ -224,14 +226,19 @@ class MakePaymentViewController: UITableViewController {
                         }
                     }
                 }
-                tableView.deselectRow(at: indexPath, animated: true)
                 self.updateLabel()
             })
             present(vc, animated: true, completion: nil)
-
+            
         default:
             break
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
+        inputRun(cell: cell)
     }
     
     func updateLabel() {
@@ -254,9 +261,11 @@ class MakePaymentViewController: UITableViewController {
     
     @objc func onTouchupDoneBtn(_ sender:UIBarButtonItem) {
         if data.name == nil {
+            self.inputRun(cell: self.nameCell)
             return
         }
         if data.price == nil {
+            self.inputRun(cell: self.priceCell)
             return
         }
         

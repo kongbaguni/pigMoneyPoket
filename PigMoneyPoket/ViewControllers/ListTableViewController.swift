@@ -111,7 +111,7 @@ class ListTableViewController: UITableViewController {
                 vc.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: nil))
                 self.present(vc, animated: true, completion: nil)
             }),
-            UITableViewRowAction(style: .default, title: "edit", handler: { (action, indexPath) in
+            UITableViewRowAction(style: .default, title: "edit".localized, handler: { (action, indexPath) in
                 let data = self.datas[indexPath.row]
                 self.performSegue(withIdentifier: "edit", sender: data.id)
             })
