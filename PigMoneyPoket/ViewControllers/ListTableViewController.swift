@@ -27,6 +27,10 @@ class ListTableViewController: UITableViewController {
             
             list = list.filter("tag contains[C] %@", ",\(tag),")
         }
+        if let date = calendarView.selectedDate {
+            list = list.filter("datetime > %@ && datetime < %@",date, Date(timeInterval: 86400
+                , since: date))
+        }
         return list
     }
     
@@ -38,6 +42,8 @@ class ListTableViewController: UITableViewController {
             tableView.tableFooterView = UIView()
             title = t
         }
+        calendarView.dataSource = self
+        calendarView.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -137,5 +143,18 @@ extension ListTableViewController: TagListViewDelegate {
         vc.tag = title
         self.navigationController?.pushViewController(vc, animated: true)
     }
+}
 
+extension ListTableViewController : FSCalendarDataSource {
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        let list = try! Realm().objects(PaymentModel.self)
+        return list.filter("datetime > %@ && datetime < %@",date, Date(timeInterval: 86400
+, since: date)).count
+    }
+}
+
+extension ListTableViewController : FSCalendarDelegate {
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        self.tableView.reloadData()
+    }
 }
