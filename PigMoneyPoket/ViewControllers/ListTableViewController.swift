@@ -32,10 +32,12 @@ class ListTableViewController: UITableViewController {
             
             list = list.filter("tag contains[C] %@", ",\(tag),")
         }
-        if let date = calendarView?.selectedDate {
-            list = list.filter("datetime > %@ && datetime < %@",date, Date(timeInterval: 86400
-                , since: date))
+        var date:Date = Date().midnight
+        if let d = calendarView?.selectedDate {
+            date = d
         }
+        list = list.filter("datetime > %@ && datetime < %@",date, Date(timeInterval: 86400
+            , since: date))
         return list
     }
     
@@ -140,7 +142,9 @@ class ListTableViewController: UITableViewController {
                     realm.delete(data)
                     try! realm.commitWrite()
                     self.calendarView.reloadData()
+                    self.tableView.beginUpdates()
                     self.tableView.deleteRows(at: [indexPath], with: .left)
+                    self.tableView.endUpdates()
                 }))
                 vc.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: nil))
                 self.present(vc, animated: true, completion: nil)
@@ -151,17 +155,7 @@ class ListTableViewController: UITableViewController {
             })
         ]
     }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        switch editingStyle {
-        case .delete:
-            tableView.deleteRows(at: [indexPath], with: .left)
-            break
-        default:
-            break
-        }
-    }
-    
+        
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
