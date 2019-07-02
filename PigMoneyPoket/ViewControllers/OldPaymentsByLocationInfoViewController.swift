@@ -18,8 +18,20 @@ class OldPaymentsByLocationInfoViewController: UITableViewController {
         debugPrint("------ \(#file) \(#function) -----")
     }
 
+    var isIncome:Bool = false
     weak var delegate:OldPaymentsByLocationInfoViewControllerDelegate? = nil
     var paymentIds:[String] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if isIncome {
+            title = "income list".localized
+        }
+        else {
+            title = "expenditure list".localized
+        }
+        
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return paymentIds.count
@@ -39,5 +51,12 @@ class OldPaymentsByLocationInfoViewController: UITableViewController {
         delegate?.didSelectPayment(id: paymentIds[indexPath.row])
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
 }
 

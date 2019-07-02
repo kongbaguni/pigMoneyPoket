@@ -12,8 +12,8 @@
 "expenditure" = "지출";
 "tag" = "태그";
 "income, expenditure" = "금전출납";
-"income list" = "이전 수입 목록";
-"expenditure list" = "이전 지출 목록";
+"income list" = "이근처의 이전 수입 목록";
+"expenditure list" = "이근처의 이전 지출 목록";
 "edit" = "수정";
 "delete" = "삭제";
 "delete?" = "삭제할까요?";

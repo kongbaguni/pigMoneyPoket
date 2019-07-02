@@ -123,6 +123,7 @@ class MakePaymentViewController: UITableViewController {
                 if let list = paymentsByLocation {
                     for pay in list {
                         vc.paymentIds.append(pay.id)
+                        vc.isIncome = pay.isIncome
                         limit += 1
                         if limit >= 10 {
                             return
