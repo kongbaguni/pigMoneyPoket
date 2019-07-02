@@ -39,6 +39,7 @@ class MakePaymentViewController: UITableViewController {
         var list = try! Realm().objects(PaymentModel.self)
         list = list.filter("isIncome = %@",self.data.isIncome)
         list = list.filter("latitude < %@ && latitude > %@ && longitude < %@ && longitude > %@", la + d1, la - d1, lo + d2, lo - d2)
+        list = list.sorted(byKeyPath: "datetime")
         return list
     }
     
@@ -118,9 +119,14 @@ class MakePaymentViewController: UITableViewController {
         case "showOldPayments":
             if let vc = segue.destination as? OldPaymentsByLocationInfoViewController {
                 vc.delegate = self
+                var limit = 0
                 if let list = paymentsByLocation {
                     for pay in list {
                         vc.paymentIds.append(pay.id)
+                        limit += 1
+                        if limit >= 10 {
+                            return
+                        }
                     }
                 }
             }
