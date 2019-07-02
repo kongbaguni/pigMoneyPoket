@@ -10,5 +10,6 @@ target 'PigMoneyPoket' do
 pod 'RealmSwift' 
 pod 'TagListView'
 pod 'FSCalendar'
-
+pod 'RxSwift'
+pod 'RxCocoa'
 end
