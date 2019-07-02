@@ -55,6 +55,7 @@ class ListTableViewController: UITableViewController {
         calendarView.dataSource = self
         calendarView.delegate = self
         setFooterViewShow()
+        calendarView.select(Date())
     }
     
     override func viewDidAppear(_ animated: Bool) {
