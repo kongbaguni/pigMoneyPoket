@@ -8,6 +8,8 @@
 
 import UIKit
 import RealmSwift
+import RxCocoa
+import RxSwift
 
 protocol OldPaymentsByLocationInfoViewControllerDelegate : class {
     func didSelectPayment(id:String)
@@ -17,10 +19,30 @@ class OldPaymentsByLocationInfoViewController: UITableViewController {
     deinit {
         debugPrint("------ \(#file) \(#function) -----")
     }
-
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var isIncome:Bool = false
     weak var delegate:OldPaymentsByLocationInfoViewControllerDelegate? = nil
-    var paymentIds:[String] = []
+
+    private var _pays:Results<PaymentModel>? = nil
+    var pays:Results<PaymentModel>? {
+        set {
+            _pays = newValue
+        }
+        get {
+            if var pays = _pays {
+                if let search = searchBar.text {
+                    if search.isEmpty == false {
+                        pays = pays.filter("name contains[C] %@", search)
+                    }
+                }
+                return pays
+            }
+            return nil
+        }
+    }
+    
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,32 +53,43 @@ class OldPaymentsByLocationInfoViewController: UITableViewController {
             title = "expenditure list".localized
         }
         
+        searchBar.rx.text
+            .orEmpty
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] _ in
+                self?.tableView.reloadData()
+                self?.tableViewLayoutFix()
+            })
+            .disposed(by: disposeBag)
+        
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableViewLayoutFix()
+    }
+        
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return paymentIds.count
+        return pays?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-        if let data = try! Realm().object(ofType: PaymentModel.self, forPrimaryKey: paymentIds[indexPath.row]) {
-            cell.loadData(data: data)
-        }
+        cell.loadData(data: pays![indexPath.row])
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         navigationController?.popViewController(animated: true)
-        delegate?.didSelectPayment(id: paymentIds[indexPath.row])
+        delegate?.didSelectPayment(id: pays![indexPath.row].id)
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
+    private func tableViewLayoutFix() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .microseconds(500)) {
+            self.tableView.contentSize.height = CGFloat((self.pays?.count ?? 0) * 100)
+        }
     }
     
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
-    }
 }
 
