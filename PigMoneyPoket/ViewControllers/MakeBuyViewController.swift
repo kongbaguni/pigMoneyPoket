@@ -9,8 +9,9 @@
 import UIKit
 import RealmSwift
 import MapKit
-import TagListView
 import CoreLocation
+import RxSwift
+import RxCocoa
 
 class MakePaymentViewController: UITableViewController {
     deinit {
@@ -44,16 +45,14 @@ class MakePaymentViewController: UITableViewController {
     }
     
     @IBOutlet weak var mapView:MKMapView!
-    @IBOutlet weak var nameCell:UITableViewCell!
-    @IBOutlet weak var tagListView:TagListView!
-    @IBOutlet weak var priceCell:UITableViewCell!
-    @IBOutlet weak var tagCell: UITableViewCell!
     
-    @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var listBtn:UIBarButtonItem!
     
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var nameLabel: UILabel!
+    
     let locationManager = CLLocationManager()
-
+    
     class Data {
         /** 수입인가?*/
         var isIncome = false
@@ -82,7 +81,7 @@ class MakePaymentViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tagLabel.text = "tag".localized
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         if let model = payment {
@@ -99,16 +98,15 @@ class MakePaymentViewController: UITableViewController {
             locationManager.startUpdatingLocation()
             mapView.showsUserLocation = true
         }
-        updateLabel()
         checkBtn()
-        priceCell.textLabel?.textColor = self.data.isIncome ? .blue : .red
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(self.onTouchupDoneBtn(_:)))
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(self.onTouchupDoneBtn(_:)))
         addOldPayments()
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -119,17 +117,7 @@ class MakePaymentViewController: UITableViewController {
         case "showOldPayments":
             if let vc = segue.destination as? OldPaymentsByLocationInfoViewController {
                 vc.delegate = self
-                var limit = 0
-                if let list = paymentsByLocation {
-                    for pay in list {
-                        vc.paymentIds.append(pay.id)
-                        vc.isIncome = pay.isIncome
-                        limit += 1
-                        if limit >= 10 {
-                            return
-                        }
-                    }
-                }
+                vc.pays = paymentsByLocation
             }
         default:
             break
@@ -180,103 +168,13 @@ class MakePaymentViewController: UITableViewController {
             mapView.setCamera(MKMapCamera(lookingAtCenter: ann.coordinate, fromDistance: 200, pitch: 30, heading: 0), animated: locationUpdateCount > 0)
             mapView.showsUserLocation = false
         }
-
-    }
-    private func inputRun(cell:UITableViewCell?) {
-        switch cell {
-        case nameCell:
-            let vc = UIAlertController(title: "이름입력", message: "이름을 입력하세요", preferredStyle: .alert)
-            vc.addTextField { (textField) in
-                textField.placeholder = "이름"
-                textField.text = self.data.name
-                textField.clearButtonMode = .whileEditing
-            }
-            vc.addAction(UIAlertAction(title: "confirm".localized, style: .cancel) { _ in
-                self.data.name = vc.textFields?.first?.text
-                self.updateLabel()
-            })
-            present(vc, animated: true, completion: nil)
-            
-        case priceCell:
-            let vc = UIAlertController(title: "가격입력", message: "가격을 입력하세요", preferredStyle: .alert)
-            vc.addTextField { (textField) in
-                textField.placeholder = "0"
-                if let p = self.data.price {
-                    textField.text = "\(p)"
-                }
-                textField.clearButtonMode = .whileEditing
-                textField.keyboardType = .numberPad
-            }
-            vc.addAction(UIAlertAction(title: "confirm".localized, style: .cancel) { _ in
-                if let t = vc.textFields?.first?.text {
-                    let price = abs(NSString(string: t).integerValue)
-                    if self.data.isIncome {
-                        self.data.price = price
-                    } else {
-                        self.data.price = -price
-                    }
-                }
-                self.updateLabel()
-            })
-            present(vc, animated: true, completion: nil)
-            
-        case tagCell:
-            let vc = UIAlertController(title: "태그편집", message: "태그 편집.", preferredStyle: .alert)
-            vc.addTextField { (textField) in
-                textField.placeholder = "태그"
-                textField.clearButtonMode = .whileEditing
-                textField.text = self.data.tagString
-            }
-            vc.addAction(UIAlertAction(title: "confirm".localized, style: .cancel) { _ in
-                self.data.tags.removeAll()
-                if let t = vc.textFields?.first?.text {
-                    for str in t.components(separatedBy: ",") {
-                        let tt = str.trimmingCharacters(in: CharacterSet(charactersIn: " "))
-                        if tt.isEmpty == false {
-                            self.data.tags.insert(tt)
-                        }
-                    }
-                }
-                self.updateLabel()
-            })
-            present(vc, animated: true, completion: nil)
-            
-        default:
-            break
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        tableView.deselectRow(at: indexPath, animated: true)
-        inputRun(cell: cell)
-    }
-    
-    func updateLabel() {
-        nameCell.textLabel?.text = "이름"
-        priceCell.textLabel?.text = "가격"
-        if let name = data.name {
-            if name.isEmpty == false {
-                nameCell.textLabel?.text = name
-            }
-        }
-        
-        if let price = data.price {
-            priceCell.textLabel?.text = NumberFormatter.localizedString(from: NSNumber(value: price), number: NumberFormatter.Style.currency)
-        }
-        tagListView.removeAllTags()
-        for tag in data.tags {
-            tagListView.addTag(tag)
-        }
     }
     
     @objc func onTouchupDoneBtn(_ sender:UIBarButtonItem) {
         if data.name == nil {
-            self.inputRun(cell: self.nameCell)
             return
         }
         if data.price == nil {
-            self.inputRun(cell: self.priceCell)
             return
         }
         
@@ -317,6 +215,5 @@ extension MakePaymentViewController : OldPaymentsByLocationInfoViewControllerDel
         }
         
         loadData(model: payment, isFixLocation: false)
-        updateLabel()
     }
 }

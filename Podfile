@@ -12,4 +12,6 @@ pod 'TagListView'
 pod 'FSCalendar'
 pod 'RxSwift'
 pod 'RxCocoa'
+pod 'Firebase/Core'
+pod 'FirebaseUI'
 end

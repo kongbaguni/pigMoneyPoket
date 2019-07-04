@@ -21,7 +21,9 @@ class OldPaymentsByLocationInfoViewController: UITableViewController {
     }
     @IBOutlet weak var searchBar: UISearchBar!
     
+    /** 수입인가? */
     var isIncome:Bool = false
+    
     weak var delegate:OldPaymentsByLocationInfoViewControllerDelegate? = nil
 
     private var _pays:Results<PaymentModel>? = nil
@@ -36,7 +38,7 @@ class OldPaymentsByLocationInfoViewController: UITableViewController {
                         pays = pays.filter("name contains[C] %@", search)
                     }
                 }
-                return pays
+                return pays.sorted(byKeyPath: "datetime",ascending: false)
             }
             return nil
         }
@@ -52,23 +54,18 @@ class OldPaymentsByLocationInfoViewController: UITableViewController {
         else {
             title = "expenditure list".localized
         }
-        
+        searchBar.placeholder = "search".localized
         searchBar.rx.text
             .orEmpty
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
-                self?.tableViewLayoutFix()
             })
             .disposed(by: disposeBag)
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        tableViewLayoutFix()
-    }
-        
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return pays?.count ?? 0
     }
@@ -83,12 +80,6 @@ class OldPaymentsByLocationInfoViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         navigationController?.popViewController(animated: true)
         delegate?.didSelectPayment(id: pays![indexPath.row].id)
-    }
-    
-    private func tableViewLayoutFix() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .microseconds(500)) {
-            self.tableView.contentSize.height = CGFloat((self.pays?.count ?? 0) * 100)
-        }
     }
     
 }

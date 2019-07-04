@@ -12,6 +12,13 @@ extension String {
         return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
     }
     
+    var isValidateEmail: Bool {
+        return NSPredicate(
+            format: "SELF MATCHES %@",
+            "([0-9a-zA-Z_-]+)@([0-9a-zA-Z_-]+)(\\.[0-9a-zA-Z_-]+){1,2}"
+            ).evaluate(with: self)
+    }
+    
     func makeDate(format:String)->Date? {
         let formater = DateFormatter()
         formater.dateFormat = format

@@ -11,12 +11,18 @@ import RealmSwift
 import TagListView
 import FSCalendar
 import MapKit
+import RxCocoa
+import RxSwift
 
 class ListTableViewController: UITableViewController {
     deinit {
         debugPrint("------ \(#file) \(#function) -----")
     }
 
+    static var navigationController : UINavigationController {
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainNavigationController") as! UINavigationController
+    }
+    
     static var viewController:ListTableViewController {
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "listController") as! ListTableViewController
     }
@@ -55,7 +61,7 @@ class ListTableViewController: UITableViewController {
         calendarView.dataSource = self
         calendarView.delegate = self
         setFooterViewShow()
-        calendarView.select(Date())
+        calendarView.select(Date())        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -184,6 +190,19 @@ class ListTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func onTouchupRightBarBtn(_ sender: UIBarButtonItem) {
+        let av = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        av.addAction(UIAlertAction(title: "logout".localized, style: .default, handler: { _ in
+            FirebaseAuthHelper.shared.signOut()
+            let realm = try! Realm()
+            try! realm.write {
+                realm.delete(realm.objects(AccountModel.self))
+                UIApplication.shared.keyWindow?.rootViewController = LoginViewController.navigationController
+            }
+        }))
+        av.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: nil))
+        present(av, animated: true, completion: nil)
+    }
 }
 
 extension ListTableViewController: TagListViewDelegate {
