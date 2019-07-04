@@ -21,11 +21,11 @@
 		C35BD6FC21E0DED000BD6BC6 /* SingleTone.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BD6FB21E0DED000BD6BC6 /* SingleTone.swift */; };
 		C35BD70121E1FB8A00BD6BC6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C35BD70321E1FB8A00BD6BC6 /* Localizable.strings */; };
 		C35BD70721E1FC7C00BD6BC6 /* String+Utill.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BD70621E1FC7C00BD6BC6 /* String+Utill.swift */; };
-		C37D7BC622CD975B00EDB287 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C37D7BC522CD975B00EDB287 /* GoogleService-Info.plist */; };
 		C37D7BC822CDA58F00EDB287 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D7BC722CDA58F00EDB287 /* LoginViewController.swift */; };
 		C37D7BCC22CDC7AB00EDB287 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D7BCB22CDC7AA00EDB287 /* JoinViewController.swift */; };
 		C37D7BCE22CDD16F00EDB287 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D7BCD22CDD16F00EDB287 /* AccountModel.swift */; };
 		C37D7BD022CDD34F00EDB287 /* FirebaseAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D7BCF22CDD34F00EDB287 /* FirebaseAuthHelper.swift */; };
+		C37D7BD622CE169C00EDB287 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C37D7BD522CE169C00EDB287 /* GoogleService-Info.plist */; };
 		C3EA47C521E373F600A11F75 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EA47C421E373F600A11F75 /* MapViewController.swift */; };
 		C3EA47C721E4C66200A11F75 /* OldPaymentsByLocationInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EA47C621E4C66200A11F75 /* OldPaymentsByLocationInfoViewController.swift */; };
 /* End PBXBuildFile section */
@@ -49,11 +49,11 @@
 		C35BD70221E1FB8A00BD6BC6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C35BD70421E1FBB800BD6BC6 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C35BD70621E1FC7C00BD6BC6 /* String+Utill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utill.swift"; sourceTree = "<group>"; };
-		C37D7BC522CD975B00EDB287 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C37D7BC722CDA58F00EDB287 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C37D7BCB22CDC7AA00EDB287 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		C37D7BCD22CDD16F00EDB287 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		C37D7BCF22CDD34F00EDB287 /* FirebaseAuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthHelper.swift; sourceTree = "<group>"; };
+		C37D7BD522CE169C00EDB287 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3EA47C421E373F600A11F75 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		C3EA47C621E4C66200A11F75 /* OldPaymentsByLocationInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldPaymentsByLocationInfoViewController.swift; sourceTree = "<group>"; };
 		F1F15F6CFA4B8AB5F5945CA1 /* Pods-PigMoneyPoket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PigMoneyPoket.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PigMoneyPoket/Pods-PigMoneyPoket.debug.xcconfig"; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 				C30F856721E0B4A8007FCD55 /* Assets.xcassets */,
 				C30F856921E0B4A8007FCD55 /* LaunchScreen.storyboard */,
 				C30F856C21E0B4A8007FCD55 /* Info.plist */,
-				C37D7BC522CD975B00EDB287 /* GoogleService-Info.plist */,
+				C37D7BD522CE169C00EDB287 /* GoogleService-Info.plist */,
 				C35BD6FB21E0DED000BD6BC6 /* SingleTone.swift */,
 			);
 			path = PigMoneyPoket;
@@ -222,7 +222,7 @@
 			files = (
 				C30F856B21E0B4A8007FCD55 /* LaunchScreen.storyboard in Resources */,
 				C35BD70121E1FB8A00BD6BC6 /* Localizable.strings in Resources */,
-				C37D7BC622CD975B00EDB287 /* GoogleService-Info.plist in Resources */,
+				C37D7BD622CE169C00EDB287 /* GoogleService-Info.plist in Resources */,
 				C30F856821E0B4A8007FCD55 /* Assets.xcassets in Resources */,
 				C30F856621E0B4A7007FCD55 /* Main.storyboard in Resources */,
 			);
