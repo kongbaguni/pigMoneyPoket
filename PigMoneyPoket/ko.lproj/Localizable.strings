@@ -25,3 +25,6 @@
 "password" = "비밀번호";
 "create account" = "계정생성";
 
+"created time" = "최초 생성시각";
+"updated time" = "마지막 수정시각";
+

@@ -45,9 +45,14 @@ class MapViewController: UIViewController {
         mapView.addAnnotation(ann)
         mapView.setCamera(MKMapCamera(lookingAtCenter: ann.coordinate, fromDistance: 800 , pitch: 30, heading: 0), animated: false)
         titleLabel.text = payment?.name
-        dateLabel.text = DateFormatter.localizedString(from: pay.createdDateTime!, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.medium)
+        dateLabel.text =
+        """
+        \("created time".localized) \(DateFormatter.localizedString(from: pay.createdDateTime!, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.medium))
+        \("updated time".localized) \(DateFormatter.localizedString(from: pay.updatedDatetime!, dateStyle: DateFormatter.Style.long, timeStyle: DateFormatter.Style.medium))
+        """
+        
         priceLabel.text = price
-        priceLabel.textColor = pay.price < 0 ? .red : .blue
+        priceLabel.textColor = pay.price < 0 ? .red : .black
         for tag in pay.tags {
             if tag.isEmpty == false {
                 tagListView.addTag(tag)

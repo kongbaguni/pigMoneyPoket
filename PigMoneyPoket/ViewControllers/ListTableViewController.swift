@@ -133,7 +133,7 @@ class ListTableViewController: UITableViewController {
             let sum:Int = datas.sum(ofProperty: "price")
             
             cell.detailTextLabel?.text = NumberFormatter.localizedString(from: NSNumber(value: sum), number: NumberFormatter.Style.currency)
-            cell.detailTextLabel?.textColor = sum < 0 ? .red : .blue
+            cell.detailTextLabel?.textColor = sum < 0 ? .red : .black
             return cell
         }
     }

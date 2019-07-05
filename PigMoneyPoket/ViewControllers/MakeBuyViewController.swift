@@ -202,7 +202,7 @@ class MakePaymentViewController: UITableViewController {
         tagTextField.text = data.tagString
         nameTextField.text = data.name
         priceTextField.text = "\(abs(data.price ?? 0))"
-        priceTextField.textColor = model.isIncome ? .blue : .red
+        priceTextField.textColor = model.isIncome ? .black : .red
     }
     
     @objc func onTouchupDoneBtn(_ sender:UIBarButtonItem) {

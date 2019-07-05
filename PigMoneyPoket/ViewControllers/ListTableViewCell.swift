@@ -25,7 +25,7 @@ class ListTableViewCell: UITableViewCell {
         nameLabel.text = data.name
         
         priceLabel.text = NumberFormatter.localizedString(from: NSNumber(value: data.price), number: NumberFormatter.Style.currency)
-        priceLabel.textColor = data.price < 0 ? .red : .blue
+        priceLabel.textColor = data.price < 0 ? .red : .black
         let ann = MKPointAnnotation()
         ann.coordinate.latitude = data.latitude
         ann.coordinate.longitude = data.longitude
