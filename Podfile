@@ -14,4 +14,5 @@ pod 'RxSwift'
 pod 'RxCocoa'
 pod 'Firebase/Core'
 pod 'FirebaseUI'
+pod 'SwiftyJSON'
 end

@@ -9,20 +9,23 @@
 import Foundation
 import FirebaseDatabase
 import FirebaseAuth
+import RealmSwift
+import SwiftyJSON
 
 class FirebaseDBHelper {
     static let shared = FirebaseDBHelper()
     let ref:DatabaseReference!
     
     init() {
-        ref = Database.database().reference()        
+        ref = Database.database().reference()
     }
 
+    var uid:String {
+        return Auth.auth().currentUser!.uid
+    }
+    
     /** 저장하기*/
     func save(model:PaymentModel) {
-        guard let uid = Auth.auth().currentUser?.uid else {
-            return
-        }
         let value:[String:Any] = [
             "name" : model.name,
             "isIncome": model.isIncome,
@@ -34,4 +37,44 @@ class FirebaseDBHelper {
         ]
         self.ref.child("pays/\(uid)/\(model.id)").setValue(value)
     }
+    
+    func delete(payid:String) {
+        self.ref.child("pays/\(uid)/\(payid)").setValue(nil)        
+    }
+    
+    func loadData(complete:@escaping()->Void) {
+        if try! Realm().objects(PaymentModel.self).count > 0 {
+            return
+        }
+        ref.child("pays/\(uid)").observeSingleEvent(of: .value) { (snapshot) in
+            guard let value = snapshot.value as? NSDictionary else {
+                return
+            }
+            
+            let json = JSON(parseJSON: value.jsonString)
+            var newModels:[Object] = []
+            for dic in json.dictionaryValue {
+                let id = dic.key
+                let model = PaymentModel()
+                model.id = id
+                model.name = json[id]["name"].stringValue
+                model.datetime = Date(timeIntervalSince1970: TimeInterval(json[id]["dateTime"].doubleValue))
+                model.price = json[id]["price"].intValue
+                model.latitude = json[id]["latitude"].doubleValue
+                model.longitude = json[id]["longitude"].doubleValue
+                model.tag = json[id]["tags"].stringValue
+                newModels.append(model)
+            }
+            
+            let realm = try! Realm()
+            realm.beginWrite()
+            realm.add(newModels, update: .modified)
+            try! realm.commitWrite()
+            DispatchQueue.main.async {
+                complete()
+            }
+        }
+    }
+    
+    
 }

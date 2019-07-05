@@ -62,6 +62,10 @@ class ListTableViewController: UITableViewController {
         setFooterViewShow()
         calendarView.select(Date())
         updateTitle()
+        FirebaseDBHelper.shared.loadData() {
+            self.tableView.reloadData()
+            self.calendarView.reloadData()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -144,14 +148,19 @@ class ListTableViewController: UITableViewController {
                 let vc = UIAlertController(title: nil, message: "delete?".localized, preferredStyle: .alert)
                 vc.addAction(UIAlertAction(title: "confirm".localized, style: .default, handler: { (action) in
                     let data = self.datas[indexPath.row]
+                    FirebaseDBHelper.shared.delete(payid: data.id)
                     let realm = try! Realm()
                     realm.beginWrite()
                     realm.delete(data)
                     try! realm.commitWrite()
                     self.calendarView.reloadData()
-                    self.tableView.beginUpdates()
-                    self.tableView.deleteRows(at: [indexPath], with: .left)
-                    self.tableView.endUpdates()
+                    if self.datas.count == 0 {
+                        self.tableView.reloadData()
+                    } else {
+                        self.tableView.beginUpdates()
+                        self.tableView.deleteRows(at: [indexPath], with: .left)
+                        self.tableView.endUpdates()
+                    }
                 }))
                 vc.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: nil))
                 self.present(vc, animated: true, completion: nil)
