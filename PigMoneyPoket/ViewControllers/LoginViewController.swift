@@ -46,16 +46,16 @@ class LoginViewController : UIViewController {
         }
         
         self.loginButton.isEnabled  = false
-        emailTextField.rx.text.orEmpty.subscribe(onNext: { (value) in
+        emailTextField.rx.text.orEmpty.subscribe(onNext: { [weak self] (value) in
             print(value)
             let newValue = value.trimmingCharacters(in: .whitespacesAndNewlines)
-            self.loginButton.isEnabled = newValue.isValidateEmail && self.passwordTextField.text?.isEmpty == false
-            self.emailTextField.text = newValue
+            self?.loginButton.isEnabled = newValue.isValidateEmail && self?.passwordTextField.text?.isEmpty == false
+            self?.emailTextField.text = newValue
         }).disposed(by: disposeBag)
         emailTextField.becomeFirstResponder()
         
-        passwordTextField.rx.text.orEmpty.subscribe(onNext: { (password) in
-            self.loginButton.isEnabled = self.emailTextField.text?.isValidateEmail == true && password.isEmpty == false
+        passwordTextField.rx.text.orEmpty.subscribe(onNext: { [weak self] (password) in
+            self?.loginButton.isEnabled = self?.emailTextField.text?.isValidateEmail == true && password.isEmpty == false
         }).disposed(by: disposeBag)
     }
     
@@ -63,7 +63,7 @@ class LoginViewController : UIViewController {
         guard let email = emailTextField.text, let passwd = passwordTextField.text else {
             return
         }
-        FirebaseAuthHelper.shared.signIn(email: email, passwod: passwd) { 
+        FirebaseAuthHelper.shared.signIn(email: email, passwod: passwd) {
             UIApplication.shared.keyWindow?.rootViewController = ListTableViewController.navigationController
         }
     }

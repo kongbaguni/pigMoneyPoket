@@ -116,19 +116,19 @@ class MakePaymentViewController: UITableViewController {
         checkBtn()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(self.onTouchupDoneBtn(_:)))
         
-        nameTextField.rx.text.orEmpty.subscribe(onNext: { value in
-            self.data.name = value
+        nameTextField.rx.text.orEmpty.subscribe(onNext: { [weak self] value in
+            self?.data.name = value
         }).disposed(by: disposeBag)
         
-        priceTextField.rx.text.orEmpty.subscribe(onNext: { value in
-            self.data.price = NSString(string: value).integerValue
+        priceTextField.rx.text.orEmpty.subscribe(onNext: { [weak self]  value in
+            self?.data.price = NSString(string: value).integerValue
         }).disposed(by: disposeBag)
         
-        tagTextField.rx.text.orEmpty.subscribe(onNext: { (value) in
-            self.data.tags.removeAll()
+        tagTextField.rx.text.orEmpty.subscribe(onNext: { [weak self] (value) in
+            self?.data.tags.removeAll()
             for tag in value.components(separatedBy: ",") {
                 if tag.isEmpty == false {
-                    self.data.tags.insert(tag)
+                    self?.data.tags.insert(tag)
                 }
             }
         }).disposed(by: disposeBag)
@@ -139,7 +139,7 @@ class MakePaymentViewController: UITableViewController {
         super.viewDidAppear(animated)
         addOldPayments()
     }
-    
+        
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let id = segue.identifier else {
             return

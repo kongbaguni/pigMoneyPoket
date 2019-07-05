@@ -22,17 +22,17 @@ class JoinViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         checkJoinBtnEnable()
-        emailTextField.rx.text.orEmpty.subscribe(onNext: { (value) in
-            self.emailTextField.text = value.trimmingCharacters(in: .whitespacesAndNewlines)
-            self.checkJoinBtnEnable()
+        emailTextField.rx.text.orEmpty.subscribe(onNext: { [weak self] (value) in
+            self?.emailTextField.text = value.trimmingCharacters(in: .whitespacesAndNewlines)
+            self?.checkJoinBtnEnable()
         }).disposed(by: disposeBag)
         
-        passwordTextField.rx.text.orEmpty.subscribe(onNext: { (value) in
-            self.checkJoinBtnEnable()
+        passwordTextField.rx.text.orEmpty.subscribe(onNext: { [weak self] (value) in
+            self?.checkJoinBtnEnable()
         }).disposed(by: disposeBag)
         
-        password2TextField.rx.text.orEmpty.subscribe(onNext: { (value) in
-            self.checkJoinBtnEnable()
+        password2TextField.rx.text.orEmpty.subscribe(onNext: { [weak self] (value) in
+            self?.checkJoinBtnEnable()
         }).disposed(by: disposeBag)
         
         emailTextField.placeholder = "email".localized
