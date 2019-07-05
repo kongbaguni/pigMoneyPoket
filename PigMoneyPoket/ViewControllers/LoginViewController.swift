@@ -63,7 +63,7 @@ class LoginViewController : UIViewController {
         guard let email = emailTextField.text, let passwd = passwordTextField.text else {
             return
         }
-        FirebaseAuthHelper.shared.signIn(email: email, passwod: passwd) { _ in
+        FirebaseAuthHelper.shared.signIn(email: email, passwod: passwd) { 
             UIApplication.shared.keyWindow?.rootViewController = ListTableViewController.navigationController
         }
     }

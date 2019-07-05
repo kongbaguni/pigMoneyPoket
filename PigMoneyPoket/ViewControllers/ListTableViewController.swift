@@ -49,7 +49,6 @@ class ListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "income, expenditure".localized
         if let t = tag {
             tableView.tableHeaderView?.isHidden = true
             tableView.tableFooterView?.isHidden = true
@@ -61,7 +60,8 @@ class ListTableViewController: UITableViewController {
         calendarView.dataSource = self
         calendarView.delegate = self
         setFooterViewShow()
-        calendarView.select(Date())        
+        calendarView.select(Date())
+        updateTitle()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -181,6 +181,10 @@ class ListTableViewController: UITableViewController {
         return CGFloat.leastNormalMagnitude
     }
     
+    private func updateTitle() {
+        title = calendarView.selectedDate?.makeString(format: "yyyy. MM. dd")
+    }
+    
     private func setFooterViewShow() {
         footerView.isHidden = false
         if let d = calendarView.selectedDate {
@@ -228,7 +232,8 @@ extension ListTableViewController : FSCalendarDataSource {
 
 extension ListTableViewController : FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        self.tableView.reloadData()
+        tableView.reloadData()
         setFooterViewShow()
+        updateTitle()
     }
 }

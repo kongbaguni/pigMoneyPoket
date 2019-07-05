@@ -60,11 +60,9 @@ class JoinViewController: UIViewController {
         guard let email = emailTextField.text, let passwd = passwordTextField.text else {
             return
         }
-        Auth.auth().createUser(withEmail: email, password: passwd) { (result, error) in
+        FirebaseAuthHelper.shared.createUser(email: email, passwd: passwd) { error in
             if error == nil {
-                FirebaseAuthHelper.shared.signIn(email: email, passwod: passwd, completion: { _ in
-                    UIApplication.shared.keyWindow?.rootViewController = ListTableViewController.navigationController
-                })
+                UIApplication.shared.keyWindow?.rootViewController = ListTableViewController.navigationController
             } else {
                 let ac = UIAlertController(title: nil, message: error?.localizedDescription, preferredStyle: UIAlertController.Style.alert)
                 ac.addAction(UIAlertAction(title: "confirm".localized, style: .cancel, handler: nil))

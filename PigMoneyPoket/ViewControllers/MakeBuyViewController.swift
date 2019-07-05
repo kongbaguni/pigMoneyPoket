@@ -229,18 +229,18 @@ class MakePaymentViewController: UITableViewController {
             uuid = model.id
         }
         
+        //Firebase db 에 쓰기
         let value:[String:Any] = [
             "name" : name,
             "isIncome": data.isIncome,
             "price" : price,
             "latitude" : coordinate.latitude,
             "longitude" : coordinate.longitude,
-            "dateTime" : Date().timeIntervalSince1970
+            "dateTime" : Date().timeIntervalSince1970,
+            "tags" : data.tagString
         ]
         
-        self.ref.child("pays/\(uid)/\(uuid)").setValue(value) { (error, ref) in
-            print(error?.localizedDescription ?? "성공이야")
-        }
+        self.ref.child("pays/\(uid)/\(uuid)").setValue(value)
         
         navigationController?.popViewController(animated: true)
 
