@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseAuth
 import UIKit
+import RealmSwift
 
 class FirebaseAuthHelper {
     static let shared = FirebaseAuthHelper()
@@ -52,6 +53,10 @@ class FirebaseAuthHelper {
     
     func signOut() {
         do {
+            let realm = try Realm()
+            try realm.write {
+                realm.deleteAll()
+            }
             try Auth.auth().signOut()
         }
         catch {
