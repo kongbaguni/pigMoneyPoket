@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import UIKit
 import RealmSwift
+import FirebaseAuth
 
 class LoginViewController : UIViewController {
     static var navigationController : UINavigationController {
@@ -29,7 +30,7 @@ class LoginViewController : UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)        
+        super.viewWillDisappear(animated)
         FirebaseAuthHelper.shared.end()
     }
     
@@ -39,18 +40,8 @@ class LoginViewController : UIViewController {
         passwordTextField.placeholder = "password".localized
         joinButton.setTitle("create account".localized, for: .normal)
         loginButton.setTitle("login".localized, for: .normal)
-        if let acc = try! Realm().objects(AccountModel.self).first {
-            for view in self.view.subviews {
-                view.isHidden = true
-            }
-            FirebaseAuthHelper.shared.signIn(email: acc.email, passwod: acc.password) { uid in
-                if let id = uid {
-                    try! Realm().write {
-                        acc.uid = id
-                    }
-                }                
-                UIApplication.shared.keyWindow?.rootViewController = ListTableViewController.navigationController
-            }
+        if Auth.auth().currentUser != nil {
+            UIApplication.shared.keyWindow?.rootViewController = ListTableViewController.navigationController
             return
         }
         
@@ -72,11 +63,8 @@ class LoginViewController : UIViewController {
         guard let email = emailTextField.text, let passwd = passwordTextField.text else {
             return
         }
-        FirebaseAuthHelper.shared.signIn(email: email, passwod: passwd) { uid in
-            if let id = uid {
-                AccountModel.makeAccount(email: email, password: passwd, uid: id)
-                UIApplication.shared.keyWindow?.rootViewController = ListTableViewController.navigationController
-            }
+        FirebaseAuthHelper.shared.signIn(email: email, passwod: passwd) { _ in
+            UIApplication.shared.keyWindow?.rootViewController = ListTableViewController.navigationController
         }
     }
     

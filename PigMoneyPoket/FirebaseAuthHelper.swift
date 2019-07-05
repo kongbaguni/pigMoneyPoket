@@ -21,7 +21,9 @@ class FirebaseAuthHelper {
     }
     
     func end() {
-        Auth.auth().removeStateDidChangeListener(handle!)
+        if let h = handle {
+            Auth.auth().removeStateDidChangeListener(h)
+        }
     }
     
     func signIn(email:String, passwod:String, completion:@escaping (_ uid:String?)->Void) {

@@ -12,6 +12,8 @@ import MapKit
 import CoreLocation
 import RxSwift
 import RxCocoa
+import FirebaseDatabase
+import FirebaseAuth
 
 class MakePaymentViewController: UITableViewController {
     deinit {
@@ -27,7 +29,7 @@ class MakePaymentViewController: UITableViewController {
         }
         return nil
     }
-    
+    var ref:DatabaseReference!
     var paymentsByLocation:Results<PaymentModel>? {
         guard let coordinate = data.coordinate else {
             return nil
@@ -51,7 +53,15 @@ class MakePaymentViewController: UITableViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var nameLabel: UILabel!
     
+    @IBOutlet weak var priceTextField: UITextField!
+    @IBOutlet weak var priceLabel: UILabel!
+    
+    @IBOutlet weak var tagTextField: UITextField!
+    @IBOutlet weak var tagLabel: UILabel!
+    
     let locationManager = CLLocationManager()
+    
+    let disposeBag = DisposeBag()
     
     class Data {
         /** 수입인가?*/
@@ -81,11 +91,19 @@ class MakePaymentViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        ref = Database.database().reference()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         if let model = payment {
             loadData(model: model)
+            if model.isIncome {
+                title = "income".localized
+                listBtn.title = "income list".localized
+            } else {
+                title = "expenditure".localized
+                listBtn.title = "expenditure list".localized
+            }
+
         } else {
             if data.isIncome {
                 title = "income".localized
@@ -100,13 +118,29 @@ class MakePaymentViewController: UITableViewController {
         }
         checkBtn()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(self.onTouchupDoneBtn(_:)))
+        
+        nameTextField.rx.text.orEmpty.subscribe(onNext: { value in
+            self.data.name = value
+        }).disposed(by: disposeBag)
+        
+        priceTextField.rx.text.orEmpty.subscribe(onNext: { value in
+            self.data.price = NSString(string: value).integerValue
+        }).disposed(by: disposeBag)
+        
+        tagTextField.rx.text.orEmpty.subscribe(onNext: { (value) in
+            self.data.tags.removeAll()
+            for tag in value.components(separatedBy: ",") {
+                if tag.isEmpty == false {
+                    self.data.tags.insert(tag)
+                }
+            }
+        }).disposed(by: disposeBag)
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         addOldPayments()
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -168,28 +202,46 @@ class MakePaymentViewController: UITableViewController {
             mapView.setCamera(MKMapCamera(lookingAtCenter: ann.coordinate, fromDistance: 200, pitch: 30, heading: 0), animated: locationUpdateCount > 0)
             mapView.showsUserLocation = false
         }
+        tagTextField.text = data.tagString
+        nameTextField.text = data.name
+        priceTextField.text = "\(abs(data.price ?? 0))"
+        priceTextField.textColor = model.isIncome ? .blue : .red
     }
     
     @objc func onTouchupDoneBtn(_ sender:UIBarButtonItem) {
-        if data.name == nil {
-            return
-        }
-        if data.price == nil {
+        guard let name = data.name, let price = data.price, let coordinate = data.coordinate, let uid = Auth.auth().currentUser?.uid else {
             return
         }
         
         let realm = try! Realm()
+        var uuid = ""
         if let model = self.payment {
             realm.beginWrite()
             model.loadData(data)
             try! realm.commitWrite()
+            uuid = model.id
         } else {
             let model = PaymentModel()
             model.loadData(data)
             realm.beginWrite()
             realm.add(model)
             try! realm.commitWrite()
+            uuid = model.id
         }
+        
+        let value:[String:Any] = [
+            "name" : name,
+            "isIncome": data.isIncome,
+            "price" : price,
+            "latitude" : coordinate.latitude,
+            "longitude" : coordinate.longitude,
+            "dateTime" : Date().timeIntervalSince1970
+        ]
+        
+        self.ref.child("pays/\(uid)/\(uuid)").setValue(value) { (error, ref) in
+            print(error?.localizedDescription ?? "성공이야")
+        }
+        
         navigationController?.popViewController(animated: true)
 
     }

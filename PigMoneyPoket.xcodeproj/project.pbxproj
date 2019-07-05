@@ -23,7 +23,6 @@
 		C35BD70721E1FC7C00BD6BC6 /* String+Utill.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35BD70621E1FC7C00BD6BC6 /* String+Utill.swift */; };
 		C37D7BC822CDA58F00EDB287 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D7BC722CDA58F00EDB287 /* LoginViewController.swift */; };
 		C37D7BCC22CDC7AB00EDB287 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D7BCB22CDC7AA00EDB287 /* JoinViewController.swift */; };
-		C37D7BCE22CDD16F00EDB287 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D7BCD22CDD16F00EDB287 /* AccountModel.swift */; };
 		C37D7BD022CDD34F00EDB287 /* FirebaseAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D7BCF22CDD34F00EDB287 /* FirebaseAuthHelper.swift */; };
 		C37D7BD622CE169C00EDB287 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C37D7BD522CE169C00EDB287 /* GoogleService-Info.plist */; };
 		C3EA47C521E373F600A11F75 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EA47C421E373F600A11F75 /* MapViewController.swift */; };
@@ -51,7 +50,6 @@
 		C35BD70621E1FC7C00BD6BC6 /* String+Utill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utill.swift"; sourceTree = "<group>"; };
 		C37D7BC722CDA58F00EDB287 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C37D7BCB22CDC7AA00EDB287 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
-		C37D7BCD22CDD16F00EDB287 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		C37D7BCF22CDD34F00EDB287 /* FirebaseAuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthHelper.swift; sourceTree = "<group>"; };
 		C37D7BD522CE169C00EDB287 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C3EA47C421E373F600A11F75 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				C324A0B321E0BDE500065C84 /* BuyModel.swift */,
-				C37D7BCD22CDD16F00EDB287 /* AccountModel.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -362,7 +359,6 @@
 				C3EA47C521E373F600A11F75 /* MapViewController.swift in Sources */,
 				C37D7BD022CDD34F00EDB287 /* FirebaseAuthHelper.swift in Sources */,
 				C35BD6FC21E0DED000BD6BC6 /* SingleTone.swift in Sources */,
-				C37D7BCE22CDD16F00EDB287 /* AccountModel.swift in Sources */,
 				C3EA47C721E4C66200A11F75 /* OldPaymentsByLocationInfoViewController.swift in Sources */,
 				C30F856121E0B4A7007FCD55 /* AppDelegate.swift in Sources */,
 				C35BD6F521E0D8BA00BD6BC6 /* ListTableViewController.swift in Sources */,

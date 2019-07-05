@@ -62,10 +62,6 @@ class JoinViewController: UIViewController {
         }
         Auth.auth().createUser(withEmail: email, password: passwd) { (result, error) in
             if error == nil {
-                guard let id = result?.user.uid else {
-                    return
-                }
-                AccountModel.makeAccount(email: email, password: passwd, uid: id)
                 FirebaseAuthHelper.shared.signIn(email: email, passwod: passwd, completion: { _ in
                     UIApplication.shared.keyWindow?.rootViewController = ListTableViewController.navigationController
                 })

@@ -196,7 +196,6 @@ class ListTableViewController: UITableViewController {
             FirebaseAuthHelper.shared.signOut()
             let realm = try! Realm()
             try! realm.write {
-                realm.delete(realm.objects(AccountModel.self))
                 UIApplication.shared.keyWindow?.rootViewController = LoginViewController.navigationController
             }
         }))

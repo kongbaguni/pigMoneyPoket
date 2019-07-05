@@ -355,6 +355,10 @@
                         <outlet property="mapView" destination="Gsj-m1-h8u" id="nF5-s2-Raa"/>
                         <outlet property="nameLabel" destination="mlM-Bn-7j4" id="mka-ES-CDR"/>
                         <outlet property="nameTextField" destination="lfF-oG-zpt" id="WQY-Z1-ekk"/>
+                        <outlet property="priceLabel" destination="X3I-IU-CgS" id="r9f-K0-ekV"/>
+                        <outlet property="priceTextField" destination="wcB-EL-n1E" id="rCb-cT-dlg"/>
+                        <outlet property="tagLabel" destination="mWs-Bt-0M1" id="BPd-Aw-inR"/>
+                        <outlet property="tagTextField" destination="fK6-Fj-j18" id="v3U-xQ-0ZR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pVC-lQ-3k5" userLabel="First Responder" sceneMemberID="firstResponder"/>
