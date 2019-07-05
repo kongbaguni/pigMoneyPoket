@@ -25,6 +25,7 @@
 		C37D7BCC22CDC7AB00EDB287 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D7BCB22CDC7AA00EDB287 /* JoinViewController.swift */; };
 		C37D7BD022CDD34F00EDB287 /* FirebaseAuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D7BCF22CDD34F00EDB287 /* FirebaseAuthHelper.swift */; };
 		C37D7BD622CE169C00EDB287 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C37D7BD522CE169C00EDB287 /* GoogleService-Info.plist */; };
+		C37D7BDA22CEE79000EDB287 /* FirebaseDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37D7BD922CEE79000EDB287 /* FirebaseDBHelper.swift */; };
 		C3EA47C521E373F600A11F75 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EA47C421E373F600A11F75 /* MapViewController.swift */; };
 		C3EA47C721E4C66200A11F75 /* OldPaymentsByLocationInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3EA47C621E4C66200A11F75 /* OldPaymentsByLocationInfoViewController.swift */; };
 /* End PBXBuildFile section */
@@ -52,6 +53,7 @@
 		C37D7BCB22CDC7AA00EDB287 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
 		C37D7BCF22CDD34F00EDB287 /* FirebaseAuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthHelper.swift; sourceTree = "<group>"; };
 		C37D7BD522CE169C00EDB287 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C37D7BD922CEE79000EDB287 /* FirebaseDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDBHelper.swift; sourceTree = "<group>"; };
 		C3EA47C421E373F600A11F75 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		C3EA47C621E4C66200A11F75 /* OldPaymentsByLocationInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldPaymentsByLocationInfoViewController.swift; sourceTree = "<group>"; };
 		F1F15F6CFA4B8AB5F5945CA1 /* Pods-PigMoneyPoket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PigMoneyPoket.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PigMoneyPoket/Pods-PigMoneyPoket.debug.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				C30F856221E0B4A7007FCD55 /* ViewController.swift */,
 				C30F856421E0B4A7007FCD55 /* Main.storyboard */,
 				C37D7BCF22CDD34F00EDB287 /* FirebaseAuthHelper.swift */,
+				C37D7BD922CEE79000EDB287 /* FirebaseDBHelper.swift */,
 				C35BD6F621E0D8E100BD6BC6 /* ViewControllers */,
 				C30F856721E0B4A8007FCD55 /* Assets.xcassets */,
 				C30F856921E0B4A8007FCD55 /* LaunchScreen.storyboard */,
@@ -361,6 +364,7 @@
 				C35BD6FC21E0DED000BD6BC6 /* SingleTone.swift in Sources */,
 				C3EA47C721E4C66200A11F75 /* OldPaymentsByLocationInfoViewController.swift in Sources */,
 				C30F856121E0B4A7007FCD55 /* AppDelegate.swift in Sources */,
+				C37D7BDA22CEE79000EDB287 /* FirebaseDBHelper.swift in Sources */,
 				C35BD6F521E0D8BA00BD6BC6 /* ListTableViewController.swift in Sources */,
 				C35BD6F821E0D92D00BD6BC6 /* ListTableViewCell.swift in Sources */,
 			);

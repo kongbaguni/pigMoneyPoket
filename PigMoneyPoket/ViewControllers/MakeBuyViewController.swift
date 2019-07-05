@@ -12,8 +12,6 @@ import MapKit
 import CoreLocation
 import RxSwift
 import RxCocoa
-import FirebaseDatabase
-import FirebaseAuth
 
 class MakePaymentViewController: UITableViewController {
     deinit {
@@ -29,7 +27,6 @@ class MakePaymentViewController: UITableViewController {
         }
         return nil
     }
-    var ref:DatabaseReference!
     var paymentsByLocation:Results<PaymentModel>? {
         guard let coordinate = data.coordinate else {
             return nil
@@ -91,7 +88,7 @@ class MakePaymentViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = Database.database().reference()
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         if let model = payment {
@@ -209,41 +206,21 @@ class MakePaymentViewController: UITableViewController {
     }
     
     @objc func onTouchupDoneBtn(_ sender:UIBarButtonItem) {
-        guard let name = data.name, let price = data.price, let coordinate = data.coordinate, let uid = Auth.auth().currentUser?.uid else {
-            return
-        }
-        
         let realm = try! Realm()
-        var uuid = ""
         if let model = self.payment {
             realm.beginWrite()
             model.loadData(data)
             try! realm.commitWrite()
-            uuid = model.id
+            FirebaseDBHelper.shared.save(model: model)
         } else {
             let model = PaymentModel()
             model.loadData(data)
             realm.beginWrite()
             realm.add(model)
             try! realm.commitWrite()
-            uuid = model.id
+            FirebaseDBHelper.shared.save(model: model)
         }
-        
-        //Firebase db 에 쓰기
-        let value:[String:Any] = [
-            "name" : name,
-            "isIncome": data.isIncome,
-            "price" : price,
-            "latitude" : coordinate.latitude,
-            "longitude" : coordinate.longitude,
-            "dateTime" : Date().timeIntervalSince1970,
-            "tags" : data.tagString
-        ]
-        
-        self.ref.child("pays/\(uid)/\(uuid)").setValue(value)
-        
         navigationController?.popViewController(animated: true)
-
     }
 }
 
