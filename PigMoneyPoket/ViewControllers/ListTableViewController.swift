@@ -42,7 +42,7 @@ class ListTableViewController: UITableViewController {
         if let d = calendarView?.selectedDate {
             date = d
         }
-        list = list.filter("datetime > %@ && datetime < %@",date, Date(timeInterval: 86400
+        list = list.filter("createdDateTime > %@ && createdDateTime < %@",date, Date(timeInterval: 86400
             , since: date))
         return list
     }
@@ -234,8 +234,7 @@ extension ListTableViewController: TagListViewDelegate {
 extension ListTableViewController : FSCalendarDataSource {
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         let list = try! Realm().objects(PaymentModel.self)
-        return list.filter("datetime > %@ && datetime < %@",date, Date(timeInterval: 86400
-, since: date)).count
+        return list.filter("createdDateTime > %@ && createdDateTime < %@",date, Date(timeInterval: 86400, since: date)).count
     }
 }
 

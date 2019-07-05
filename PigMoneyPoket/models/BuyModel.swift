@@ -21,8 +21,10 @@ class PaymentModel: Object {
     @objc dynamic var latitude:Double = 0
     /** 위치정보 */
     @objc dynamic var longitude:Double = 0
-    /** 날자*/
-    @objc dynamic var datetime:Date? = nil
+    /** 생성 날자*/
+    @objc dynamic var createdDateTime:Date? = nil
+    /** 수정 날자*/
+    @objc dynamic var updatedDatetime:Date? = nil
     /** 수입내역인가?*/
     @objc dynamic var isIncome:Bool = false
     
@@ -47,8 +49,8 @@ class PaymentModel: Object {
             self.price = -abs(price)
         }
         self.latitude = coordinate.latitude
-        self.longitude = coordinate.longitude
-        self.datetime = Date()
+        self.longitude = coordinate.longitude        
+        self.updatedDatetime = Date()
         self.isIncome = data.isIncome
         self.tag = "," + data.tagString + ","
     }

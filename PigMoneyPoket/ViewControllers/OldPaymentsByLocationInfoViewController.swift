@@ -38,7 +38,7 @@ class OldPaymentsByLocationInfoViewController: UITableViewController {
                         pays = pays.filter("name contains[C] %@", search)
                     }
                 }
-                return pays.sorted(byKeyPath: "datetime",ascending: false)
+                return pays.sorted(byKeyPath: "createdDateTime",ascending: false)
             }
             return nil
         }

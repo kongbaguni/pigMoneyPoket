@@ -32,7 +32,8 @@ class FirebaseDBHelper {
             "price" : model.price,
             "latitude" : model.coordinate2D.latitude,
             "longitude" : model.coordinate2D.longitude,
-            "dateTime" : model.datetime?.timeIntervalSince1970 ?? Date().timeIntervalSince1970,
+            "createdDateTime" : model.createdDateTime?.timeIntervalSince1970 ?? Date().timeIntervalSince1970,
+            "updatedDateTime" : model.updatedDatetime?.timeIntervalSince1970 ?? Date().timeIntervalSince1970,
             "tags" : model.tag
         ]
         self.ref.child("pays/\(uid)/\(model.id)").setValue(value)
@@ -58,7 +59,8 @@ class FirebaseDBHelper {
                 let model = PaymentModel()
                 model.id = id
                 model.name = json[id]["name"].stringValue
-                model.datetime = Date(timeIntervalSince1970: TimeInterval(json[id]["dateTime"].doubleValue))
+                model.createdDateTime = Date(timeIntervalSince1970: TimeInterval(json[id]["createDateTime"].doubleValue))
+                model.updatedDatetime = Date(timeIntervalSince1970: TimeInterval(json[id]["updateDateTime"].doubleValue))
                 model.price = json[id]["price"].intValue
                 model.latitude = json[id]["latitude"].doubleValue
                 model.longitude = json[id]["longitude"].doubleValue

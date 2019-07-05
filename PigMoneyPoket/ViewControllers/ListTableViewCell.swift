@@ -40,7 +40,7 @@ class ListTableViewCell: UITableViewCell {
             }
         }
         
-        if let date = data.datetime {
+        if let date = data.createdDateTime {
             let str = DateFormatter.localizedString(from: date, dateStyle: .full, timeStyle: DateFormatter.Style.medium)
             dateLabel.text = str
         }

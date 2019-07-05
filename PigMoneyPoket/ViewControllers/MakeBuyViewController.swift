@@ -39,7 +39,7 @@ class MakePaymentViewController: UITableViewController {
         var list = try! Realm().objects(PaymentModel.self)
         list = list.filter("isIncome = %@",self.data.isIncome)
         list = list.filter("latitude < %@ && latitude > %@ && longitude < %@ && longitude > %@", la + d1, la - d1, lo + d2, lo - d2)
-        list = list.sorted(byKeyPath: "datetime")
+        list = list.sorted(byKeyPath: "createdDateTime")
         return list
     }
     
@@ -214,6 +214,7 @@ class MakePaymentViewController: UITableViewController {
             FirebaseDBHelper.shared.save(model: model)
         } else {
             let model = PaymentModel()
+            model.createdDateTime = Date()
             model.loadData(data)
             realm.beginWrite()
             realm.add(model)
